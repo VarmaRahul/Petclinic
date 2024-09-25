@@ -56,12 +56,6 @@ jobs:
       with:
         name: application-war
 
-    - name: List files in the workspace
-      run: ls -alht
-
-    - name: directory
-      run: pwd
-
     - name: Build the Docker image
       run: docker build --file Dockerfile -t xedose/petclinic-github-actions .
 
