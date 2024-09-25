@@ -39,7 +39,7 @@ jobs:
       run: mvn clean install
 
     - name: Build the Docker image
-      run: docker build --file Dockerfile -t petclinic .
+      run: docker build --file Dockerfile -t xedose/petclinic .
 
     - name: Docker Hub Login
       uses: docker/login-action@v3.3.0
