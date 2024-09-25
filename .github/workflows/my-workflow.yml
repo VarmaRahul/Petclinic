@@ -63,7 +63,7 @@ jobs:
       run: pwd
 
     - name: Build the Docker image
-      run: docker build --file Dockerfile -t xedose/petclinic .
+      run: docker build --file Dockerfile -t xedose/petclinic-github-actions .
 
     - name: Docker Hub Login
       uses: docker/login-action@v3
@@ -72,4 +72,4 @@ jobs:
         password: ${{secrets.DOCKERHUB_PASSWORD}}
 
     - name: Push to Docker Hub
-      run: docker push xedose/petclinic
+      run: docker push xedose/petclinic-github-actions
