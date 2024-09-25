@@ -27,15 +27,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-
-    - name: Cache Maven Dependencies
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
-    
+  
     - name: Code Compile
       run: mvn clean compile
 
@@ -45,20 +37,21 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
     
-    - name: Save JAR artifact
+    - name: Save WAR artifact
       uses: actions/upload-artifact@v4
       with:
-        name: application-jar
-        path: target/*.jar
+        name: application-war
+        path: target/*.war
+        if-no-files-found: warn
 
   docker-build:
     runs-on: ubuntu-latest
     needs: maven-build
     steps:
-    - name: Download JAR artifact
+    - name: Download WAR artifact
       uses: actions/download-artifact@v4
       with:
-        name: application-jar
+        name: application-war
   
     - name: Build the Docker image
       run: docker build --file Dockerfile -t xedose/petclinic .
