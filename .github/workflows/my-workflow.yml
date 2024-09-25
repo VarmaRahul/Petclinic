@@ -48,13 +48,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: maven-build
     steps:
+    - name : Git Checkout
+      uses: actions/checkout@v4
+    
     - name: Download WAR artifact
       uses: actions/download-artifact@v4
       with:
         name: application-war
 
     - name: List files in the workspace
-      run: ls -al
+      run: ls -alht
+
+    - name: directory
+      run: pwd
 
     - name: Build the Docker image
       run: docker build --file Dockerfile -t xedose/petclinic .
